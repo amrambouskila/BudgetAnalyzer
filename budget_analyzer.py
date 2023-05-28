@@ -113,6 +113,9 @@ class BudgetAnalyzer:
     months = {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'June', 7: 'July',
               8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'December'}
 
+    budget_colors = sns.color_palette('hls', 9)
+    spending_colors = sns.color_palette('husl', 9)
+
     def __init__(self, budget: Budget, start_date: str, actual_spending: str, periods: int = 12):
         self.start_date = start_date
         self.budget = budget
@@ -156,7 +159,7 @@ class BudgetAnalyzer:
         self.visualize_budget()
         for month in list(set(self.actual_spending['Date'].dt.month)):
             self.visualize_budget(month=month)
-        self.visualize_budget()
+        self.visualize_budget(average=True)
         print('Visualizations Complete!')
 
     @staticmethod
@@ -263,10 +266,6 @@ class BudgetAnalyzer:
         sns.despine()
 
     def visualize_monthly_expense_distribution(self, ax, month=None, average=False):
-        # colors = sns.color_palette('cubehelix', len(self.budget.categorized_monthly_expenses.keys()))
-        colors = sns.color_palette('Paired')
-        budget_colors = colors[::2]
-        spending_colors = colors[1::2]
         sorted_expenses = dict(sorted(self.budget.categorized_monthly_expenses.items(), key=lambda item: item[1], reverse=True))
         x = np.arange(len(sorted_expenses))
 
@@ -285,8 +284,9 @@ class BudgetAnalyzer:
                            width=0.35, label=f'{current_month} Spending')
             legend_lines = []
             for idx, (bar, bar2) in enumerate(zip(bars, bars2)):
-                budget_color = budget_colors[idx]
-                spending_color = spending_colors[idx]
+                print(idx)
+                budget_color = self.budget_colors[idx]
+                spending_color = self.spending_colors[idx]
                 bar.set_color(budget_color)
                 bar2.set_color(spending_color)
                 label = [*sorted_expenses.keys()][idx]
@@ -301,7 +301,7 @@ class BudgetAnalyzer:
             bars2 = ax.bar(x + 0.35, [*self.average_monthly_categorical_spending.reset_index()['Amount']],
                            width=0.35, label='Monthly Average')
             legend_lines = []
-            for idx, (bar, bar2, color) in enumerate(zip(bars, bars2, colors)):
+            for idx, (bar, bar2, color) in enumerate(zip(bars, bars2, budget_colors)):
                 bar.set_color(color)
                 label = [*sorted_expenses.keys()][idx]
                 self.visualizations[label] = mplcursors.cursor(bar, multiple=False, hover=True)
@@ -312,7 +312,7 @@ class BudgetAnalyzer:
             bars = ax.bar([*sorted_expenses.keys()], [sorted_expenses[expense] for expense in sorted_expenses.keys()])
             bars2 = None
             legend_lines = []
-            for idx, (bar, color) in enumerate(zip(bars, colors)):
+            for idx, (bar, color) in enumerate(zip(bars, budget_colors)):
                 bar.set_color(color)
                 label = [*sorted_expenses.keys()][idx]
                 self.visualizations[label] = mplcursors.cursor(bar, multiple=False, hover=True)
@@ -323,7 +323,7 @@ class BudgetAnalyzer:
         ax.set_xlabel('Expense')
         ax.set_ylabel('Cost')
         ax.set_title('Monthly Expenses')
-        self.adjust_legend(legend_lines=legend_lines, ax=ax, colors=colors)
+        self.adjust_legend(legend_lines=legend_lines, ax=ax, colors=budget_colors)
         ax.tick_params(axis='x', rotation=45)
 
     def visualize_investment_distribution(self, ax, month=None, average=False):
@@ -601,7 +601,7 @@ if __name__ == '__main__':
                                  }
     bofa_monthly_income = 9620.44
     bofa_start_date = '2023-01-01'
-    bofa_actual_spending = r'C:\Users\Amram\IMPORTANT\Projects\dev\budget_dev\data\2023_transactions.csv'
+    bofa_actual_spending = r'C:\Users\Amram\IMPORTANT\Projects\budget_analyzer\BudgetAnalyzer\data\2023_transactions.csv'
     spending_analytics = budget_analyzer(monthly_expenses=bofa_monthly_expenses,
                                          yearly_expenses=bofa_yearly_expenses,
                                          monthly_diet=bofa_monthly_diet,
