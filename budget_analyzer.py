@@ -599,9 +599,9 @@ if __name__ == '__main__':
                                  'IYR': 0.046875,
                                  'GLD': 0.015625,
                                  }
-    bofa_monthly_income = 9620.44
+    bofa_monthly_income = 14570.
     bofa_start_date = '2023-01-01'
-    bofa_actual_spending = r'C:\Users\Amram\IMPORTANT\Projects\budget_analyzer\BudgetAnalyzer\data\2023_transactions.csv'
+    bofa_actual_spending = r'{hidden_path_variable}.csv'
     spending_analytics = budget_analyzer(monthly_expenses=bofa_monthly_expenses,
                                          yearly_expenses=bofa_yearly_expenses,
                                          monthly_diet=bofa_monthly_diet,
