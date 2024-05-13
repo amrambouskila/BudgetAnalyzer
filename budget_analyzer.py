@@ -546,66 +546,33 @@ def budget_analyzer(monthly_expenses: dict,
 
 
 if __name__ == '__main__':
-    bofa_monthly_expenses = {'AmazonPrime': {'amount': 15.13, 'day': 22, 'category': 'Entertainment'},
-                             'Apple': {'amount': 2.99, 'day': 5, 'category': 'Utility'},
-                             'Crunchyroll': {'amount': 7.99, 'day': 20, 'category': 'Entertainment'},
-                             'JetBrains': {'amount': 6.90, 'day': 14, 'category': 'Education'},
-                             'Spotify': {'amount': 18.09, 'day': 13, 'category': 'Entertainment'},
-                             'FPL': {'amount': 180.45, 'day': 1, 'category': 'Utility'},
-                             'Verizon': {'amount': 70.00, 'day': 17, 'category': 'Utility'},
-                             'AT&T': {'amount': 62.31, 'day': 12, 'category': 'Utility'},
-                             'ChatGPT': {'amount': 20.00, 'day': 16, 'category': 'Education'},
-                             'CapitalOne': {'amount': 1000.00, 'day': 5, 'category': 'Transportation'},
-                             'ShonenJump': {'amount': 1.99, 'day': 31, 'category': 'Entertainment'},
-                             'Rent': {'amount': 3300.00, 'day': 1, 'category': 'Shelter'}
-                             }
-    bofa_yearly_expenses = {'Chess': {'amount': 29.99, 'date': '07-19', 'category': 'Entertainment'},
-                            'MicrosoftOffice': {'amount': 99.99, 'date': '03-03', 'category': 'Utilities'},
-                            'Ring': {'amount': 39.99, 'date': '10-06', 'category': 'Utilities'},
-                            'Nintendo': {'amount': 19.99, 'date': '01-01', 'category': 'Entertainment'},
-                            'PlayStation': {'amount': 59.99, 'date': '01-01', 'category': 'Entertainment'},
-                            'MedicalMarijuana': {'amount': 400.00, 'date': '01-01', 'category': 'Utilities'},
-                            'BristolWest': {'amount': 4732.00, 'date': '01-01', 'category': 'Transportation'},
+    monthly_expenses = {'AmazonPrime': {'amount': 15.13, 'day': 22, 'category': 'Entertainment'},
+                        'Spotify': {'amount': 18.09, 'day': 13, 'category': 'Entertainment'},
+                        'Rent': {'amount': 3300.00, 'day': 1, 'category': 'Shelter'},
+                        ...
+                        }
+    
+    yearly_expenses = {'Chess': {'amount': 29.99, 'date': '07-19', 'category': 'Entertainment'},
+                       ...
+                       }
+    
+    monthly_diet = {'Eggs': 60,
+                    'Spinach': 16,
+                    ...
+                    }
+    
+    investment_portfolio = {'BTC': 0.642,
+                            'SPY': 0.258,
+                            ...
                             }
-    bofa_monthly_diet = {'Eggs': 60,
-                         'Spinach': 16,
-                         'Oil': 20,
-                         'Bread': 25,
-                         'Butter': 18,
-                         'Pure Encapsulations Multivitamin': 40,
-                         'Pure Encapsulations Vitamin D3': 30,
-                         'Chobani Greek Yogurt': 30,
-                         'Mandarin': 10,
-                         'Banana': 20,
-                         'Blueberries': 40,
-                         'Apple': 56,
-                         'Salmon': 200,
-                         'Chicken': 250,
-                         'Steak': 100,
-                         'Quinoa / Rice': 40,
-                         'Tomato': 50,
-                         'Broccoli': 20,
-                         'Cucumber': 30,
-                         'Avocado': 60,
-                         'Carrots': 16,
-                         'Celery': 8,
-                         }
-    bofa_investment_portfolio = {'BTC': 0.250000,
-                                 'ETH': 0.250000,
-                                 'SPY': 0.140625,
-                                 'SMH': 0.125000,
-                                 'IWM': 0.109375,
-                                 'EFA': 0.062500,
-                                 'IYR': 0.046875,
-                                 'GLD': 0.015625,
-                                 }
-    bofa_monthly_income = 14570.
-    bofa_start_date = '2023-01-01'
-    bofa_actual_spending = r'{hidden_path_variable}.csv'
-    spending_analytics = budget_analyzer(monthly_expenses=bofa_monthly_expenses,
-                                         yearly_expenses=bofa_yearly_expenses,
-                                         monthly_diet=bofa_monthly_diet,
-                                         investment_portfolio=bofa_investment_portfolio,
-                                         monthly_income=bofa_monthly_income,
-                                         start_date=bofa_start_date,
-                                         actual_spending=bofa_actual_spending)
+    
+    monthly_income = ...
+    start_date = ...
+    actual_spending = r'{hidden_path_variable}.csv'
+    spending_analytics = budget_analyzer(monthly_expenses=monthly_expenses,
+                                         yearly_expenses=yearly_expenses,
+                                         monthly_diet=monthly_diet,
+                                         investment_portfolio=investment_portfolio,
+                                         monthly_income=monthly_income,
+                                         start_date=start_date,
+                                         actual_spending=actual_spending)
